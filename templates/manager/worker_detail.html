@@ -3,7 +3,22 @@
 
 
 {% block content %}
-  <h1>Worker detail</h1>
-  <p>First name: {{ worker.first_name }}</p>
+  <h1>{{ worker.first_name }} {{ worker.last_name }}</h1>
+  <hr>
+  <p>Username: {{ worker.username }}</p>
+  <p>Email: {{ worker.email }}</p>
+  <p>Position: {{ worker.position }}</p>
+  <hr>
+  <p>
+  Current task:
+    {% if worker.tasks.all %}
+      {% for task in worker.tasks.all %}
+        <a href="{% url 'manager:task-detail' task.id %}">{{ task.name }}</a>
+      {% endfor %}
+    {% else %}
+      <p>No active tasks.</p>
+    {% endif %}
+  </p>
+
 {% endblock %}
 ```

@@ -1,7 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Task detail</h1>
-  <p><strong>Task name:</strong> {{ task.name }}</p>
+  <h1>{{ task.name }}</h1>
+  <hr>
+  <p><strong>Task description:</strong> {{ task.description }}</p>
+  <p><strong>Task deadline:</strong> {{ task.deadline }}</p>
+  <p>
+    <strong>Task status:</strong>
+    {% if task.is_completed %}
+      Completed
+    {% else %}
+      Active
+    {% endif %}
+  </p>
+  <p><strong>Task priority:</strong> {{ task.priority }}</p>
+  <p><strong>Task type:</strong> {{ task.task_type }}</p>
+  <hr>
+  <p>
+    <strong>Task assignees:</strong>
+    {% for worker in task.assignees.all %}
+      <a href="{% url 'manager:worker-detail' worker.id %}">
+        {{ worker.first_name }} {{ worker.last_name }}{% if not forloop.last %}, {% endif %}
+      </a>
+    {% endfor %}
+  </p>
 {% endblock %}
 ```

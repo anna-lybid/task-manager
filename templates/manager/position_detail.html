@@ -3,7 +3,18 @@
 {% block content %}
   <h1>Position detail</h1>
   <p>
-      <strong>Position:</strong>
-      {{ position.name }}
+    <strong>Position:</strong>
+    {{ position.name }}
+  </p>
+  <p>
+    <strong>All employees who have this position:</strong>
+  </p>
+  <ul>
+    {% for worker in position.worker_set.all %}
+      <li>
+        <a href="{% url 'manager:worker-detail' worker.id %}">{{ worker.first_name }} {{ worker.last_name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
 {% endblock %}
 ```

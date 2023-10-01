@@ -1,7 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Task type detail</h1>
-  <p>Task type name: {{ tasktype.name }}</p>
+  <h1>{{ tasktype.name }}</h1>
+  <hr>
+  {% if tasktype.tasks.all %}
+  {% for task in tasktype.tasks.all %}
+    <ul class="col-md-8">
+      <li>
+        <h3>{{ task.name }}</h3>
+        <p>{{ task.description }}</p>
+      </li>
+    </ul>
+  <hr>
+  {% endfor %}
+  {% else %}
+  <p>No active tasks found.</p>
+  {% endif %}
 {% endblock %}
 ```
