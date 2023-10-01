@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Positions</h1>
+  <h1>Positions:</h1>
+    {% if position_list %}
+    <ul>
+      {% for position in position_list %}
+        <li>
+          {{ position.id }}
+          <a href="{% url "manager:position-detail" pk=position.id %} ">{{ position.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no positions at this time.</p>
+  {% endif %}
 {% endblock %}
 ```
