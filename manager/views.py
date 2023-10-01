@@ -5,14 +5,13 @@ from manager.models import Task, Worker, Position, TaskType
 
 
 def index(request):
-    """View function for the home page of the site."""
     return render(request, "manager/index.html")
 
 
 class TaskListView(generic.ListView):
     model = Task
     template_name = "manager/task_list.html"
-    paginate_by = 10
+    paginate_by = 5
 
 
 class TaskDetailView(generic.DetailView):
@@ -24,7 +23,7 @@ class WorkerListView(generic.ListView):
     model = Worker
     context_object_name = "worker_list"
     template_name = "manager/worker_list.html"
-    paginate_by = 10
+    paginate_by = 5
 
 
 class WorkerDetailView(generic.DetailView):
@@ -35,7 +34,7 @@ class WorkerDetailView(generic.DetailView):
 class PositionListView(generic.ListView):
     model = Position
     template_name = "manager/position_list.html"
-    paginate_by = 10
+    paginate_by = 5
 
 
 class PositionDetailView(generic.DetailView):
@@ -46,7 +45,7 @@ class PositionDetailView(generic.DetailView):
 class TaskTypeListView(generic.ListView):
     model = TaskType
     template_name = "manager/task_type_list.html"
-    paginate_by = 10
+    paginate_by = 5
 
 
 class TaskTypeDetailView(generic.DetailView):
