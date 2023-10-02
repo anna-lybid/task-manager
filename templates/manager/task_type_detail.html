@@ -16,5 +16,7 @@
   {% else %}
   <p>No active tasks found.</p>
   {% endif %}
+   <input type="button" class="link-input" value="Delete" onclick="window.location.href='{% url 'manager:task-type-delete' tasktype.id %}'">
+  <input type="button" class="link-input" value="Update" onclick="window.location.href='{% url 'manager:task-type-update' tasktype.id %}'">
 {% endblock %}
 ```

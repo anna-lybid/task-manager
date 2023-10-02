@@ -1,19 +1,25 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
   <h1>Workers</h1>
+  <form method="get" action="" class="form-inline">
+    {{ search_form | crispy }}
+    <input type="submit" value="🔎" class="btn btn-secondary">
+  </form>
   <hr>
   {% if worker_list %}
     <ul>
       {% for worker in worker_list %}
         <li>
           {{ worker.id }}
-          <a href="{% url "manager:worker-detail" pk=worker.id %} ">{{ worker.first_name }}</a>
+          <a href="{% url "manager:worker-detail" pk=worker.id %} ">{{ worker.first_name }} {{ worker.last_name }} - {{ worker.username }}</a>
         </li>
       {% endfor %}
     </ul>
   {% else %}
     <p>There are no workers at this time.</p>
   {% endif %}
+  <input type="button" class="link-input" value="Create" onclick="window.location.href='{% url 'manager:worker-create' %}'">
 {% endblock %}
 ```

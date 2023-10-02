@@ -1,7 +1,14 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
   <h1>Tasks</h1>
+
+  <form method="get" action="" class="form-inline">
+    {{ search_form | crispy }}
+    <input type="submit" value="🔎" class="btn btn-secondary">
+  </form>
+
   <hr>
   {% if task_list %}
     <ul>
@@ -15,5 +22,6 @@
   {% else %}
     <p>There are no tasks at this time.</p>
   {% endif %}
+
+  <input type="button" class="link-input" value="Create" onclick="window.location.href='{% url 'manager:task-create' %}'">
 {% endblock %}
-```

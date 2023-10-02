@@ -24,5 +24,7 @@
       </a>
     {% endfor %}
   </p>
+  <input type="button" class="link-input" value="Delete" onclick="window.location.href='{% url 'manager:task-delete' task.id %}'">
+  <input type="button" class="link-input" value="Update" onclick="window.location.href='{% url 'manager:task-update' task.id %}'">
 {% endblock %}
 ```

@@ -19,6 +19,8 @@
       <p>No active tasks.</p>
     {% endif %}
   </p>
+  <input type="button" class="link-input" value="Delete" onclick="window.location.href='{% url 'manager:worker-delete' worker.id %}'">
+  <input type="button" class="link-input" value="Update" onclick="window.location.href='{% url 'manager:worker-update' worker.id %}'">
 
 {% endblock %}
 ```
