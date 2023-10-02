@@ -23,16 +23,16 @@ a:hover {
 }
 
 .pagination-container {
-  display: flex;
+  position: absolute;
   justify-content: flex-end;
   align-items: flex-start;
-  margin-top: 20px;
+  margin-top: -143px;
+  margin-left: 70%;
+
 }
 
 .pagination {
-  float: right;
-  top: 0;
-  z-index: 1;
+    width: 150px;
 }
 
 table {
@@ -75,9 +75,6 @@ button {
      transition: background-color 1s, transform 0.5s;
 }
 
-.back-link {
-}
-
 li {
     text-align: left;
 }
@@ -88,10 +85,68 @@ li {
 }
 
 .search-task-types-field {
-    width: 300px;
+    width: 350px;
+    margin-right: -170px;
 }
 
 .create-task-but {
     width: 150px;
     margin-left: 50px;
+}
+
+.order-form {
+    display: grid;
+}
+
+.create-tasks-but {
+    float: right;
+    width: 150px;
+    margin-right: 250px;
+}
+
+.form-inline {
+    margin-left: 20px;
+}
+
+.btn-secondary {
+    display: flex;
+    margin-left:170px;
+}
+
+.group-sort {
+    margin-top: -60px;
+}
+
+.sr-only {
+    color: #18bc9c;
+    font-size: 18px;
+}
+
+#fixed-pagination {
+    position: fixed;
+    bottom: 24px;
+    right: 400px;
+    padding: 10px;
+    z-index: 999;
+}
+
+.task-detail-but {
+    width: 150px;
+    margin-left: 50px;
+    float: right;
+}
+
+.del-button {
+    width: 125px;
+    margin-left: 15px;
+}
+
+h2 {
+    margin-left: 30px;
+}
+
+.log-btn {
+    margin-top: 30px;
+    width: 100px;
+    margin-left: 30px;
 }

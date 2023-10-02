@@ -19,13 +19,16 @@ class PositionsSearchForm(forms.Form):
     )
 
 
-class TaskSearchOrderForm(forms.Form):
+class TaskSearchForm(forms.Form):
     name = forms.CharField(
         max_length=100,
         required=False,
         label="",
         widget=forms.TextInput(attrs={"placeholder": "Task name"}),
     )
+
+
+class TaskOrderForm(forms.Form):
     sort_by = forms.MultipleChoiceField(
         choices=[('deadline', 'Deadline'), ('priority', 'Priority')],
         required=False,

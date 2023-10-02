@@ -3,6 +3,7 @@
 
 {% block content %}
   <h1>Workers</h1>
+  <form method="get" action="">
     <div class="row search-task-types">
       <div class="col-2 search-task-types-field">
         {{ search_form | crispy }}
@@ -11,6 +12,7 @@
         <input type="submit" value="🔎" class="btn btn-secondary">
       </div>
     </div>
+  </form>
   <hr>
   {% if worker_list %}
     <table>
@@ -30,10 +32,10 @@
             <td><a href="{% url 'manager:worker-detail' pk=worker.id %}">{{ worker.first_name }} {{ worker.last_name }}</a></td>
             <td>{{ worker.username }}</td>
             <td>
-              <a href="#">Update</a>
+              <a href="{% url 'manager:worker-update' worker.id %}">Update</a>
             </td>
             <td>
-              <a href="#">Delete</a>
+              <a href="{% url 'manager:worker-delete' worker.id %}">Delete</a>
             </td>
           </tr>
         {% endfor %}
@@ -42,6 +44,6 @@
   {% else %}
     <p>There are no workers at this time.</p>
   {% endif %}
-  <input type="button" class="link-input create-task-but" value="Create" onclick="window.location.href='{% url 'manager:worker-create' %}'">
+  <input type="button" class="btn btn-secondary create-task-but" value="Create" onclick="window.location.href='{% url 'manager:worker-create' %}'">
 {% endblock %}
 ```

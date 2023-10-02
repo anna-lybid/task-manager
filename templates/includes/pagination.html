@@ -1,4 +1,5 @@
-{% if is_paginated %}
+<div id="fixed-pagination">
+  {% if is_paginated %}
   <div class="pagination-container">
     <ul class="pagination">
       {% if page_obj.has_previous %}
@@ -16,4 +17,6 @@
       {% endif %}
     </ul>
   </div>
-{% endif %}
+  {% endif %}
+
+</div>

@@ -1,22 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>{{ tasktype.name }}</h1>
-  <hr>
-  {% if tasktype.tasks.all %}
-  {% for task in tasktype.tasks.all %}
-    <ul class="col-md-8">
-      <li>
-        <h3>{{ task.name }}</h3>
-        <p>{{ task.description }}</p>
-      </li>
-    </ul>
-  <hr>
-  {% endfor %}
-  {% else %}
-  <p>No active tasks found.</p>
-  {% endif %}
-   <input type="button" class="link-input" value="Delete" onclick="window.location.href='{% url 'manager:task-type-delete' tasktype.id %}'">
-  <input type="button" class="link-input" value="Update" onclick="window.location.href='{% url 'manager:task-type-update' tasktype.id %}'">
+  <div style="margin-left: 70px; margin-top: 50px">
+    <h2>{{ tasktype.name }}</h2>
+    <hr>
+    {% if tasktype.tasks.all %}
+    {% for task in tasktype.tasks.all %}
+      <ul class="col-md-8">
+        <li>
+          <h6><strong>{{ task.name }}</strong></h6>
+          <p>{{ task.description }}</p>
+        </li>
+      </ul>
+    <hr>
+    {% endfor %}
+    {% else %}
+      <p>No active tasks found.</p>
+    {% endif %}
+  </div>
+  <input type="button" class="btn btn-secondary task-detail-but" value="Delete" onclick="window.location.href='{% url 'manager:task-type-delete' tasktype.id %}'">
+  <input type="button" class="btn btn-secondary task-detail-but" value="Update" onclick="window.location.href='{% url 'manager:task-type-update' tasktype.id %}'">
 {% endblock %}
 ```

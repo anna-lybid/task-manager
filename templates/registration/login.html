@@ -2,23 +2,23 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
+  <div style="">
+    {% if form.errors %}
+      <p style="margin-top: 30px">Your username and password didn't match. Please try again.</p>
+    {% endif %}
 
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+    {% if next %}
+      <h2 style="margin-top: 30px">Please log in to see this page</h2>
+    {% else %}
+      <h2>Log in to see the features of this site.</h2>
+    {% endif %}
 
-<h1>Login</h1>
+    <form method="post" action="{% url 'login' %}" style="padding-top: 40px" novalidate>
+      {% csrf_token %}
+      {{ form|crispy }}
 
-{% if next %}
-  <p>Please login to see this page.</p>
-{% endif %}
-
-<form method="post" action="{% url 'login' %}">
-  {% csrf_token %}
-  {{ form|crispy }}
-
-  <input type="submit" value="Login" class="btn btn-primary" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</form>
-
+      <input type="submit" value="Login" class="btn btn-secondary log-btn">
+      <input type="hidden" name="next" value="{{ next }}">
+    </form>
+  </div>
 {% endblock %}

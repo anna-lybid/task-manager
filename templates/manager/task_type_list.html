@@ -29,8 +29,8 @@
           <tr>
             <td>{{ tasktype.id }}</td>
             <td><a href="{% url 'manager:task-type-detail' pk=tasktype.id %}">{{ tasktype.name }}</a></td>
-            <td><a href="#">Update</a></td>
-            <td><a href="#">Delete</a></td>
+            <td><a href="{% url 'manager:task-type-update' tasktype.id %}">Update</a></td>
+            <td><a href="{% url 'manager:task-type-delete' tasktype.id %}">Delete</a></td>
           </tr>
         {% endfor %}
       </tbody>

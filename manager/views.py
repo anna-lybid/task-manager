@@ -4,7 +4,13 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from manager.forms import WorkerSearchForm, PositionsSearchForm, TaskSearchOrderForm, TaskTypeSearchForm
+from manager.forms import (
+    WorkerSearchForm,
+    PositionsSearchForm,
+    TaskTypeSearchForm,
+    TaskSearchForm,
+    TaskOrderForm
+)
 from manager.models import Task, Worker, Position, TaskType
 
 
@@ -23,14 +29,11 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
-        form = TaskSearchOrderForm(self.request.GET)
-        context["search_form"] = form
+        search_form = TaskSearchForm(self.request.GET)
+        order_form = TaskOrderForm(self.request.GET)
 
-        sort_by = self.request.GET.getlist("sort_by")
-        context["sort_by"] = sort_by
-
-        active_only = self.request.GET.get("active_only", False)
-        context["active_only"] = active_only
+        context["search_form"] = search_form
+        context["order_form"] = order_form
 
         return context
 
