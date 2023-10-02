@@ -30,7 +30,7 @@ class TaskSearchForm(forms.Form):
 
 class TaskOrderForm(forms.Form):
     sort_by = forms.MultipleChoiceField(
-        choices=[('deadline', 'Deadline'), ('priority', 'Priority')],
+        choices=[("deadline", "Deadline"), ("priority", "Priority")],
         required=False,
         label="Sort by",
         widget=forms.CheckboxSelectMultiple(),

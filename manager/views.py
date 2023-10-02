@@ -1,33 +1,36 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
+from django.db.models.query import QuerySet
+
+from typing import Any, Dict
 
 from manager.forms import (
     WorkerSearchForm,
     PositionsSearchForm,
     TaskTypeSearchForm,
     TaskSearchForm,
-    TaskOrderForm
+    TaskOrderForm,
 )
 from manager.models import Task, Worker, Position, TaskType
 
 
-def index(request):
+def index(request) -> HttpResponse:
     return render(request, "manager/index.html")
 
 
-def learn_more(request):
+def learn_more(request)  -> HttpResponse:
     return render(request, "includes/learn_more.html")
 
 
 class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
-    template_name = "manager/task_list.html"
     paginate_by = 7
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> Dict[str, Any]:
         context = super(TaskListView, self).get_context_data(**kwargs)
         search_form = TaskSearchForm(self.request.GET)
         order_form = TaskOrderForm(self.request.GET)
@@ -37,7 +40,7 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
         return context
 
-    def get_queryset(self):
+    def get_queryset(self) -> "QuerySet[Task]":
         queryset = super(TaskListView, self).get_queryset()
         name = self.request.GET.get("name")
         if name:
@@ -45,10 +48,10 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
         sort_by = self.request.GET.getlist("sort_by")
 
-        if 'deadline' in sort_by:
-            queryset = queryset.order_by('deadline')
-        elif 'priority' in sort_by:
-            queryset = queryset.order_by('priority')
+        if "deadline" in sort_by:
+            queryset = queryset.order_by("deadline")
+        elif "priority" in sort_by:
+            queryset = queryset.order_by("priority")
 
         active_only = self.request.GET.get("active_only", False)
         if active_only:
@@ -59,7 +62,6 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
-    template_name = "manager/task_detail.html"
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
@@ -82,23 +84,22 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 class WorkerListView(LoginRequiredMixin, generic.ListView):
     model = Worker
     context_object_name = "worker_list"
-    template_name = "manager/worker_list.html"
     paginate_by = 7
 
-    def get_queryset(self):
+    def get_queryset(self) -> "QuerySet[Worker]":
         queryset = super(WorkerListView, self).get_queryset()
         query = self.request.GET.get("query")
 
         if query:
             queryset = queryset.filter(
-                Q(username__icontains=query) |
-                Q(first_name__icontains=query) |
-                Q(last_name__icontains=query)
+                Q(username__icontains=query)
+                | Q(first_name__icontains=query)
+                | Q(last_name__icontains=query)
             )
 
         return queryset
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> Dict[str, Any]:
         context = super(WorkerListView, self).get_context_data(**kwargs)
         context["search_form"] = WorkerSearchForm(
             initial={
@@ -110,7 +111,6 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
 
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
-    template_name = "manager/worker_detail.html"
 
 
 class WorkerCreateView(LoginRequiredMixin, generic.CreateView):
@@ -135,7 +135,7 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
     template_name = "manager/position_list.html"
     paginate_by = 7
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> Dict[str, Any]:
         context = super(PositionListView, self).get_context_data(**kwargs)
         context["search_form"] = PositionsSearchForm(
             initial={
@@ -144,7 +144,7 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
         )
         return context
 
-    def get_queryset(self):
+    def get_queryset(self) -> "QuerySet[Position]":
         queryset = super(PositionListView, self).get_queryset()
         name = self.request.GET.get("name")
         if name:
@@ -154,7 +154,6 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
 
 class PositionDetailView(LoginRequiredMixin, generic.DetailView):
     model = Position
-    template_name = "manager/position_detail.html"
 
 
 class PositionCreateView(LoginRequiredMixin, generic.CreateView):
@@ -179,7 +178,7 @@ class TaskTypeListView(LoginRequiredMixin, generic.ListView):
     template_name = "manager/task_type_list.html"
     paginate_by = 7
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> Dict[str, Any]:
         context = super(TaskTypeListView, self).get_context_data(**kwargs)
         context["search_form"] = TaskTypeSearchForm(
             initial={
@@ -188,7 +187,7 @@ class TaskTypeListView(LoginRequiredMixin, generic.ListView):
         )
         return context
 
-    def get_queryset(self):
+    def get_queryset(self) -> "QuerySet[TaskType]":
         queryset = super(TaskTypeListView, self).get_queryset()
         name = self.request.GET.get("name")
         if name:

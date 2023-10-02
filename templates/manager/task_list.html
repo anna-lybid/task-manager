@@ -41,18 +41,16 @@
 
   <input type="button" class="btn btn-secondary create-tasks-but" value="Create" onclick="window.location.href='{% url 'manager:task-create' %}'">
 
-
-
-<form class="form-inline">
-  <input type="submit" class="btn btn-secondary mb-2" value="Apply">
-    <div class="form-group group-sort mb-2">
-        <label class="sr-only" for="inlineFormInputGroupUsername2">Sort by</label>
-        {{ order_form.sort_by }}
-              {{ order_form.active_only }}
-        <label class="form-check-label" for="inlineFormCheck">
-            Active tasks only
-        </label>
-    </div>
-</form>
+  <form class="form-inline">
+    <input type="submit" class="btn btn-secondary mb-2" value="Apply">
+      <div class="form-group group-sort mb-2">
+          <label class="sr-only" for="inlineFormInputGroupUsername2">Sort by</label>
+          {{ order_form.sort_by }}
+                {{ order_form.active_only }}
+          <label class="form-check-label" for="inlineFormCheck">
+              Active tasks only
+          </label>
+      </div>
+  </form>
 
 {% endblock %}
