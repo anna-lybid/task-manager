@@ -4,24 +4,40 @@
 {% block content %}
   <h1>Tasks</h1>
 
-  <form method="get" action="" class="form-inline">
-    {{ search_form | crispy }}
-    <input type="submit" value="🔎" class="btn btn-secondary">
+  <form method="get" action="">
+    <div class="row search-task-types">
+      <div class="col-2 search-task-types-field">
+        {{ search_form | crispy }}
+      </div>
+      <div class="col-1">
+        <input type="submit" value="🔎" class="btn btn-secondary">
+      </div>
+    </div>
   </form>
 
   <hr>
   {% if task_list %}
-    <ul>
-      {% for task in task_list %}
-        <li>
-          {{ task.id }}
-          <a href="{% url "manager:task-detail" pk=task.id %} ">{{ task.name }}</a>
-        </li>
-      {% endfor %}
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in task_list %}
+          <tr>
+            <td>{{ task.id }}</td>
+            <td><a href="{% url 'manager:task-detail' pk=task.id %}">{{ task.name }}</a></td>
+            <td><a href="#">Edit</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   {% else %}
     <p>There are no tasks at this time.</p>
   {% endif %}
 
-  <input type="button" class="link-input" value="Create" onclick="window.location.href='{% url 'manager:task-create' %}'">
+  <input type="button" class="link-input create-task-but" value="Create" onclick="window.location.href='{% url 'manager:task-create' %}'">
 {% endblock %}

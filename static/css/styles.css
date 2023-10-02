@@ -30,7 +30,7 @@ a:hover {
 }
 
 .pagination {
-  position: sticky;
+  float: right;
   top: 0;
   z-index: 1;
 }
@@ -76,4 +76,22 @@ button {
 }
 
 .back-link {
+}
+
+li {
+    text-align: left;
+}
+
+.search-task-types {
+    float: right;
+    margin-bottom: 10px;
+}
+
+.search-task-types-field {
+    width: 300px;
+}
+
+.create-task-but {
+    width: 150px;
+    margin-left: 50px;
 }

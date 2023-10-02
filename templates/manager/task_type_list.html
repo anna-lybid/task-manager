@@ -3,9 +3,15 @@
 
 {% block content %}
   <h1>Task types</h1>
-  <form method="get" action="" class="form-inline">
-    {{ search_form | crispy }}
-    <input type="submit" value="🔎" class="btn btn-secondary">
+  <form method="get" action="">
+    <div class="row search-task-types">
+      <div class="col-2 search-task-types-field">
+        {{ search_form | crispy }}
+      </div>
+      <div class="col-1">
+        <input type="submit" value="🔎" class="btn btn-secondary">
+      </div>
+    </div>
   </form>
   <hr>
   {% if tasktype_list %}
@@ -32,5 +38,5 @@
   {% else %}
     <p>There are no task types at this time.</p>
   {% endif %}
-  <input type="button" class="link-input" value="Create" onclick="window.location.href='{% url 'manager:task-type-create'%}'">
+  <input type="button" class="btn btn-secondary create-task-but" value="Create" onclick="window.location.href='{% url 'manager:task-type-create'%}'">
 {% endblock %}

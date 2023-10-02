@@ -3,23 +3,45 @@
 
 {% block content %}
   <h1>Workers</h1>
-  <form method="get" action="" class="form-inline">
-    {{ search_form | crispy }}
-    <input type="submit" value="🔎" class="btn btn-secondary">
-  </form>
+    <div class="row search-task-types">
+      <div class="col-2 search-task-types-field">
+        {{ search_form | crispy }}
+      </div>
+      <div class="col-1">
+        <input type="submit" value="🔎" class="btn btn-secondary">
+      </div>
+    </div>
   <hr>
   {% if worker_list %}
-    <ul>
-      {% for worker in worker_list %}
-        <li>
-          {{ worker.id }}
-          <a href="{% url "manager:worker-detail" pk=worker.id %} ">{{ worker.first_name }} {{ worker.last_name }} - {{ worker.username }}</a>
-        </li>
-      {% endfor %}
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for worker in worker_list %}
+          <tr>
+            <td>{{ worker.id }}</td>
+            <td><a href="{% url 'manager:worker-detail' pk=worker.id %}">{{ worker.first_name }} {{ worker.last_name }}</a></td>
+            <td>{{ worker.username }}</td>
+            <td>
+              <a href="#">Update</a>
+            </td>
+            <td>
+              <a href="#">Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   {% else %}
     <p>There are no workers at this time.</p>
   {% endif %}
-  <input type="button" class="link-input" value="Create" onclick="window.location.href='{% url 'manager:worker-create' %}'">
+  <input type="button" class="link-input create-task-but" value="Create" onclick="window.location.href='{% url 'manager:worker-create' %}'">
 {% endblock %}
 ```

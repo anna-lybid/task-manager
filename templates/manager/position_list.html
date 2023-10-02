@@ -2,23 +2,44 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>Positions:</h1>
-  <form method="get" action="" class="form-inline">
-    {{ search_form | crispy }}
-    <input type="submit" value="🔎" class="btn btn-secondary">
-  </form>
+  <h1>Positions</h1>
+    <div class="row search-task-types">
+      <div class="col-2 search-task-types-field">
+        {{ search_form | crispy }}
+      </div>
+      <div class="col-1">
+        <input type="submit" value="🔎" class="btn btn-secondary">
+      </div>
+    </div>
+    <hr>
     {% if position_list %}
-    <ul>
-      {% for position in position_list %}
-        <li>
-          {{ position.id }}
-          <a href="{% url "manager:position-detail" pk=position.id %} ">{{ position.name }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>There are no positions at this time.</p>
-  {% endif %}
-    <input type="button" class="link-input" value="Create" onclick="window.location.href='{% url 'manager:position-create' %}'">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for position in position_list %}
+            <tr>
+              <td>{{ position.id }}</td>
+              <td><a href="{% url 'manager:position-detail' pk=position.id %}">{{ position.name }}</a></td>
+              <td>
+                <a href="#">Update</a>
+              </td>
+              <td>
+                <a href="#">Delete</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>There are no positions at this time.</p>
+    {% endif %}
+    <input type="button" class="link-input create-task-but" value="Create" onclick="window.location.href='{% url 'manager:position-create' %}'">
 {% endblock %}
 ```
