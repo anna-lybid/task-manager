@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div style="text-align: center; margin-top: 50px">
+    <h2>Position detail</h2>
+      <p>
+        <strong>Position:</strong>
+        {{ position.name }}
+      </p>
+      {% if position.worker_set.all %}
+        <p>
+          <strong>All employees who have this position:</strong>
+        </p>
+        <ul>
+          {% for worker in position.worker_set.all %}
+            <li>
+              <a href="{% url 'manager:worker-detail' worker.id %}">{{ worker.first_name }} {{ worker.last_name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>
+          <strong>There are no employees with this position for now.</strong>
+        </p>
+      {% endif %}
+    </div>
+    <div style="margin-right: 35%; margin-top: 50px">
+    <input type="button" class="btn btn-secondary task-detail-but" value="Delete" onclick="window.location.href='{% url 'manager:position-delete' position.id %}'">
+      </div>
+    <div>
+      <input type="button" class="btn btn-secondary task-detail-but" value="Update" onclick="window.location.href='{% url 'manager:position-update' position.id %}'">
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <h1>Positions</h1>
+  <form method="get" action="">
+    <div class="row search-task-types">
+      <div class="col-2 search-task-types-field">
+        {{ search_form | crispy }}
+      </div>
+      <div class="col-1">
+        <input type="submit" value="🔎" class="btn btn-secondary">
+      </div>
+    </div>
+  </form>
+  <hr>
+  {% if position_list %}
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for position in position_list %}
+          <tr>
+            <td>{{ position.id }}</td>
+            <td><a href="{% url 'manager:position-detail' pk=position.id %}">{{ position.name }}</a></td>
+            <td>
+              <a href="{% url 'manager:position-update' position.id %}">Update</a>
+            </td>
+            <td>
+              <a href="{% url 'manager:position-delete' position.id %}">Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>There are no positions at this time.</p>
+  {% endif %}
+  <input type="button" class="btn btn-secondary create-task-but" value="Create" onclick="window.location.href='{% url 'manager:position-create' %}'">
+{% endblock %}

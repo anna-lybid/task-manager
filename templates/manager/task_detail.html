@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>{{ task.name }}</h2>
+  <hr>
+  <table>
+    <tr>
+      <th>Task description:</th>
+      <td>{{ task.description }}</td>
+    </tr>
+    <tr>
+      <th>Task deadline:</th>
+      <td>{{ task.deadline }}</td>
+    </tr>
+    <tr>
+      <th>Task status:</th>
+      <td>
+        {% if task.is_completed %}
+          Completed
+        {% else %}
+          Active
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <th>Task priority:</th>
+      <td>{{ task.priority }}</td>
+    </tr>
+    <tr>
+      <th>Task type:</th>
+      <td>{{ task.task_type }}</td>
+    </tr>
+    <tr>
+      <th>Task assignees:</th>
+      <td>
+        {% for worker in task.assignees.all %}
+          <a href="{% url 'manager:worker-detail' worker.id %}">
+            {{ worker.first_name }} {{ worker.last_name }}{% if not forloop.last %}, {% endif %}
+          </a>
+        {% endfor %}
+      </td>
+    </tr>
+  </table>
+  <input type="button" class="btn btn-secondary task-detail-but" value="Delete" onclick="window.location.href='{% url 'manager:task-delete' task.id %}'">
+  <input type="button" class="btn btn-secondary task-detail-but" value="Update" onclick="window.location.href='{% url 'manager:task-update' task.id %}'">
+{% endblock %}
