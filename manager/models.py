@@ -39,7 +39,7 @@ class Task(models.Model):
         ("high", "High"),
     )
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=63)
     description = models.TextField()
     deadline = models.DateTimeField()
     is_completed = models.BooleanField(default=False)
