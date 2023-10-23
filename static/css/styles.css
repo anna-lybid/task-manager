@@ -101,7 +101,7 @@ li {
 .create-tasks-but {
     float: right;
     width: 150px;
-    margin-right: 250px;
+    margin-right: 130px;
 }
 
 .form-inline {
@@ -124,7 +124,7 @@ li {
 
 #fixed-pagination {
     position: fixed;
-    bottom: 24px;
+    bottom: 98px;
     right: 400px;
     padding: 10px;
     z-index: 999;
